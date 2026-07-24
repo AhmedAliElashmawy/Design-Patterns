@@ -1,0 +1,88 @@
+Strategy Pattern (Behavioral Design Pattern)
+
+Reference: https://youtu.be/v9ejT8FO-7I\?si\=KbGYT3YrYCHr-bZK
+
+What is the Strategy Pattern?
+The Strategy Pattern is a behavioral design pattern that lets an object change its behavior at runtime without changing its class. Instead of hardcoding one behavior into a class, you separate the behavior into different strategy objects and swap them when needed.
+
+Why it exists
+A class can become too rigid when it contains many behaviors that may change over time. If you rely too much on inheritance, you often end up with:
+- duplicated code
+- unnecessary subclasses
+- behaviors that are hard to change later
+
+The main idea is to favor composition over inheritance.
+Instead of thinking:
+- “A duck is a duck”
+You think:
+- “A duck has a flying behavior”
+- “A duck has a quacking behavior”
+
+This makes the design more flexible and easier to extend.
+
+The problem it solves
+Imagine a Duck class with methods such as fly() and quack(). If you create many different duck types, some may fly, some may not, and some may need different flying styles. If all of this logic is placed directly inside the Duck class:
+- ducks that should not fly may accidentally inherit flying behavior
+- shared behavior becomes difficult to reuse
+- changing behavior requires changing the class design
+
+The Strategy Pattern solves this by extracting behaviors into separate classes.
+
+Core idea
+The pattern separates a behavior from the main class and wraps it in an object. That object is called a strategy.
+
+Main components
+1. Context
+   - The main class that uses a strategy.
+   - It holds a reference to a strategy object.
+2. Strategy interface
+   - Defines a common interface for all possible behaviors.
+3. Concrete strategies
+   - Different implementations of the strategy interface.
+4. Client
+   - Chooses which strategy to use and assigns it to the context.
+
+Classic example: Duck behavior
+Suppose a Duck class needs different flying and quacking behaviors.
+Instead of putting all logic inside Duck, you create interfaces such as:
+- IFlyBehavior
+- IQuackBehavior
+
+Then you implement different classes such as:
+- FlyWithWings
+- FlyNoWay
+- QuackNormally
+- SilenceQuack
+
+The Duck class can then receive one of these behaviors through constructor injection or setter injection.
+
+How it works in practice
+- A duck is created with a specific fly behavior.
+- The duck uses that behavior when fly() is called.
+- If you want the duck to behave differently, you simply change the strategy.
+
+This means the same object can change behavior without changing its class.
+
+Benefits of the Strategy Pattern
+- reduces code duplication
+- makes code easier to maintain
+- allows runtime behavior changes
+- improves flexibility and scalability
+- keeps classes simpler and more focused
+
+When to use it
+Use the Strategy Pattern when:
+- you have multiple ways of doing the same task
+- you want to switch behaviors at runtime
+- you want to avoid large conditional logic
+- you want to keep your classes open for extension
+
+In short
+The Strategy Pattern is about taking varying behaviors and placing them into separate objects so they can be swapped easily. It is a powerful design pattern for making software more flexible, cleaner, and easier to maintain.
+
+Quick revision summary
+- Strategy Pattern = choose behavior dynamically
+- It uses composition instead of inheritance
+- Behaviors are encapsulated into separate strategy classes
+- The context delegates behavior to the strategy
+- It makes software easier to extend and change
